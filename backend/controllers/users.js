@@ -118,7 +118,7 @@ module.exports.getProfile = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь по указанному _id не найден');
       }
-      res.send(user);
+      res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
