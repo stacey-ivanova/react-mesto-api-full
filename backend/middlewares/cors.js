@@ -1,12 +1,14 @@
-module.exports.cors = function(req, res, next) {
-  const allowedCors = [
-    'https://mesto.stacey.nomoredomains.icu',
-    'https://api.mesto.stacey.nomoredomains.icu',
-    'localhost:3000',
-  ];
+const allowedCors = [
+  'https://mesto.stacey.nomoredomains.icu',
+  'https://api.mesto.stacey.nomoredomains.icu',
+  'localhost:3000',
+];
+
+const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+
+const cors = (req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -18,4 +20,7 @@ module.exports.cors = function(req, res, next) {
   }
 
   next();
+};
+module.exports = {
+  cors,
 };
