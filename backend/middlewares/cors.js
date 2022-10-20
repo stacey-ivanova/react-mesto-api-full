@@ -14,11 +14,9 @@ const cors = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
   } if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-  } if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
-
   next();
 };
 module.exports = {
