@@ -20,7 +20,7 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.findAllCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.send({ card }))
+    .then((card) => res.send({ data: card }))
     .catch((err) => {
       next(err);
     });
