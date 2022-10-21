@@ -8,14 +8,16 @@ module.exports.createCard = (req, res, next) => {
   const userId = req.user._id;
 
   Card.create({ name, link, owner: userId })
-    .then((card) => res.send(card))
-    .catch(
-      (err) => {
-        if (err.name === 'ValidationError') {
-          next(new BadRequestError('Переданы некорректные данные при создании карточки'));
-        } else next(err);
-      },
-    );
+    .then((card) =>
+    console.log(сard.owner);
+    res.send(card));
+    // .catch(
+    //   (err) => {
+    //     if (err.name === 'ValidationError') {
+    //       next(new BadRequestError('Переданы некорректные данные при создании карточки'));
+    //     } else next(err);
+    //   },
+    // );
 };
 
 module.exports.findAllCards = (req, res, next) => {
