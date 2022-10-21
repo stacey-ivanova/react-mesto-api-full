@@ -8,7 +8,7 @@ module.exports.createCard = (req, res, next) => {
   const userId = req.user._id;
 
   Card.create({ name, link, owner: userId })
-    .populate(['owner', 'likes'])
+    .populate('owner')
     .then((card) => res.send(card))
     .catch(
       (err) => {
