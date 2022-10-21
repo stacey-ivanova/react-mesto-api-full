@@ -20,7 +20,7 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.findAllCards = (req, res, next) => {
   Card.find({})
-    .populate(['owner', 'likes'])
+    // .populate(['owner', 'likes'])
     .then((card) => res.send(card))
     .catch((err) => {
       next(err);
@@ -52,7 +52,7 @@ module.exports.likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user } },
     { new: true },
   )
-  // .populate(['owner', 'likes'])
+  .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
@@ -73,7 +73,7 @@ module.exports.dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user } },
     { new: true },
   )
-    // .populate(['owner', 'likes'])
+    .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
