@@ -56,7 +56,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
       }
-      console.log(card)
+
       res.send(card);
     })
     .catch((err) => {
@@ -77,7 +77,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
       }
-      console.log(card)
+
       res.send(card);
     })
     .catch((err) => {
