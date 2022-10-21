@@ -8,7 +8,7 @@ module.exports.createCard = (req, res, next) => {
   const userId = req.user._id;
 
   Card.create({ name, link, owner: userId })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(
       (err) => {
         if (err.name === 'ValidationError') {
@@ -21,7 +21,7 @@ module.exports.createCard = (req, res, next) => {
 module.exports.findAllCards = (req, res, next) => {
   Card.find({})
     .populate(['likes', 'owner'])
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       next(err);
     });
@@ -56,7 +56,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -75,7 +75,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Передан несуществующий _id карточки');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
