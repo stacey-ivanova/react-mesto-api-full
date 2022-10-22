@@ -38,12 +38,14 @@ module.exports.deleteCardById = (req, res, next) => {
     Card.deleteOne(card)
       .then(() => {
         res.send({ message: 'Карточка успешно удалена' });
-      });
-  }).catch((err) => {
-    if (err.name === 'CastError') {
-      next(new BadRequestError('Переданы некорректные данные карточки.'));
-    } else next(err);
-  });
+      })
+      .catch((err) => { next(err); });
+  })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные карточки.'));
+      } else next(err);
+    });
 };
 
 module.exports.likeCard = (req, res, next) => {

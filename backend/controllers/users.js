@@ -107,7 +107,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'Error') {
-        next(new UnauthorizedError('Пользователь с таким email уже существует'));
+        next(new UnauthorizedError('Неверный логин или пароль'));
       } else next(err);
     });
 };
@@ -121,8 +121,6 @@ module.exports.getProfile = (req, res, next) => {
       res.send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError(`Переданы некорректные данные при запросе.${req.params.userId}`));
-      } else next(err);
+      next(err);
     });
 };
